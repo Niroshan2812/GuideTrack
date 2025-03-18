@@ -84,7 +84,7 @@ const GuideStepForm:React.FC =()=>{
                 <div>
                     <label className="block text-sm font-medium text-gray-700">What to do</label>
                     <textarea 
-                    name="whatToDo"
+                    name="hint"
                     value={formData.hint}
                     onChange={handleChange}
                     className="w-full mt-1 p-2 border rounded-lg focus:ring focus:ring-blue-200"
