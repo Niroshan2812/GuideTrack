@@ -7,7 +7,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     await AsyncStorage.setItem('userToken', 'abc123'); // Store token
-    router.replace('/AboutScreen'); // Redirect to About after login
+    router.replace('/Screen/Dashboard'); // Redirect to About after login
   };
 
   return (

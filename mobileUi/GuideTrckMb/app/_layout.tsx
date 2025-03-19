@@ -15,10 +15,12 @@ export default function Layout() {
       const token = await AsyncStorage.getItem('userToken')
       if (token) {
         setIsAuthenticated(true);
-        router.replace('/AboutScreen'); // Redirect to About if logged in
+        router.replace('/Screen/Dashboard'); // Redirect to About if logged in
       } else {
         setIsAuthenticated(false);
-        router.replace('/Auth/Login'); // Redirect to Login if not logged in
+        //router.replace('/Auth/Login'); // Redirect to Login if not logged in
+
+        router.replace('/Screen/Dashboard'); 
       }
     };
 
@@ -30,8 +32,9 @@ export default function Layout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ title: 'Home' }} />
-      <Stack.Screen name="AboutScreen" options={{ title: 'About' }} />
       <Stack.Screen name="Auth/Login" options={{ title: 'Login' }} />
+      <Stack.Screen name = "Screen/Dashboard" options={{title:'Dashboard'}}/>
+      
     </Stack>
   );
 }
