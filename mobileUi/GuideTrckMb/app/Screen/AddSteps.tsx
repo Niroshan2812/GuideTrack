@@ -9,6 +9,7 @@ import StepShow from '../component/StepShow';
 
 export default function AddSteps() {
     const { title } = useLocalSearchParams();
+    const { selectedCategory } = useLocalSearchParams();
     const [stepNumber, setStepNumber] = useState(1);
     const [task, setTask] = useState('');
     const [image, setImage] = useState<string | null>(null);
@@ -73,6 +74,9 @@ useEffect(() => {
             console.log('Failed to stop recording', error);
         }
     };
+
+    // in here i pass selectedCategory here you can use if need////
+    // >--  selectedCategory
 
     const saveStep = async () => {
         await insertStep(parseInt(guideId as string), stepNumber, task, image, recordingUri, hint);

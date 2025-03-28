@@ -36,12 +36,39 @@ const initializeDatabace = async () => {
                 FOREIGN KEY(guideId) REFERENCES guides(id) ON DELETE CASCADE
                 )
          `);
+
+         // for Save Category 
+         await db.execAsync(`
+            CREATE TABLE IF NOT EXISTS category(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL
+                )
+            
+            `);
         console.log('Database initialized sucessfully');
 
     } catch (error) {
         console.log('Failed to initialize database', error);
     }
 };
+
+const insertCategory = async (name: string) => {
+    if (!db) {
+        console.log('Database not initialized');
+        throw new Error('Database not initialized');
+    }
+    try {
+        const result = await db.runAsync(`
+            INSERT INTO category(name)
+            VALUES(?)`, [name]);
+
+        console.log('Category inserted', result.lastInsertRowId);
+        return result.lastInsertRowId;
+    } catch (error) {
+        console.log('Failed to insert category', error);
+        throw error;
+    }
+}
 
 const insertGuide =  async(title: string, description: string, category: string) => {
     if(!db) {
@@ -97,6 +124,32 @@ const fegtchSteps = async () => {
     return result;
 }
 
+const fetchGuide = async()=>{
+    if (!db) {
+        console.log('Database not initialized');
+        return [];
+    }
+
+    const result = await db.getAllAsync(`
+        SELECT * FROM guides
+    `);
+
+    return result;
+}
+
+const fetchCategory = async()=>{
+    if (!db) {
+        console.log('Database not initialized');
+        return [];
+    }
+
+    const result = await db.getAllAsync(`
+        SELECT * FROM category
+    `);
+
+    return result;
+}
+
 const deleteTables = async () => {
     if (!db) {
         console.log('Database not initialized');
@@ -117,4 +170,4 @@ const deleteTables = async () => {
 
 
 
-export { initializeDatabace, insertStep, fegtchSteps , insertGuide,deleteTables};
+export { initializeDatabace, insertStep,insertCategory, fegtchSteps , insertGuide,deleteTables, fetchGuide,fetchCategory};
