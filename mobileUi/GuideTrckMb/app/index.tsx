@@ -1,7 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
+import { useEffect } from 'react';
+import { initializeDatabace } from './Config/db';
 
 export default function Index() {
+  useEffect(() => {
+    initializeDatabace();
+   
+  },[]);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home Screen</Text>

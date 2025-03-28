@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import {View, Text, StyleSheet, TextInput, Button} from 'react-native'
 import { Picker } from '@react-native-picker/picker';
 import { useRouter } from 'expo-router';
+import { insertGuide } from '../Config/db';
 
 export default function AddNewGuide(){
     const [title,setTitle] = useState('');
@@ -25,6 +26,15 @@ export default function AddNewGuide(){
         setCategories(fetchedCategories);
     };
 
+    const saveGuideAndGotoSteps= async()=>{
+        if (!title || !description || !selectedCategory) {
+            alert('Please fill all fields');
+            return;
+        }
+        const guideId = await insertGuide(title, description, selectedCategory);
+        router.push({pathname:'/Screen/AddSteps', params:{guideId, title}});
+    }
+
     return(
         <View style={styles.containner} >
             <Text style = {styles.mainTxt}>Add new Guide </Text>
@@ -46,7 +56,7 @@ export default function AddNewGuide(){
             
             <Button 
                 title= "Let's goto add steps"
-                onPress={()=>router.push({pathname:'/Screen/AddSteps',params:{title,description, selectedCategory}} )}/>
+                onPress={saveGuideAndGotoSteps}/>
         </View>
     )
 }

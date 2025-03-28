@@ -34,6 +34,7 @@ export default function Layout() {
       <Stack.Screen name="index" options={{ title: 'Home' }} />
       <Stack.Screen name="Auth/Login" options={{ title: 'Login' }} />
       <Stack.Screen name = "Screen/Dashboard" options={{title:'Dashboard'}}/>
+      <Stack.Screen name = "Screen/StepShow" options={{title:'Step Show'}}/>
       
     </Stack>
   );
